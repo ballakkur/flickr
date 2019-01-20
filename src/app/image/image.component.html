@@ -1,0 +1,35 @@
+<!-- <div class="col-md-12 border" *ngFor="let current of photos">
+     
+  <img src="https://farm{{current.farm}}.staticflickr.com/{{current.server}}/{{current.id}}_{{current.secret}}.jpg" alt="" height="250" width="250" style="border:1px solid blue">
+ </div> -->
+ <app-navbar>
+   
+ </app-navbar>
+ <div >
+
+   <mat-spinner class="position" *ngIf="photos== undefined"></mat-spinner>
+ </div>
+
+ <div class="container-fluid" style="padding-top:69px;">
+
+   <mat-grid-list style="margin-bottom:30px;" gutterSize='16px' cols={{columns}} rowHeight="2:1">
+    <mat-grid-tile  *ngFor="let current of photos | paginate: { itemsPerPage: 10, currentPage: p }">
+    <mat-grid-tile-header *ngIf ="reviewData && current.id==snapId">
+      star:{{reviewData.star}}
+      reviewer:{{reviewData.Name}}
+      comment:{{reviewData.description}}
+    </mat-grid-tile-header>
+       <img (click)="review(current.id)" src="https://farm{{current.farm}}.staticflickr.com/{{current.server}}/{{current.id}}_{{current.secret}}.jpg" alt="{{current.title}}">
+    <mat-grid-tile-footer> {{current.title}} </mat-grid-tile-footer>
+      </mat-grid-tile>
+  </mat-grid-list>
+ </div>
+<!--  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator> -->
+<div *ngIf="photos">
+  <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+
+</div>
+
